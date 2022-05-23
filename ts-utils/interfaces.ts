@@ -5,4 +5,8 @@ interface Puppy {
     birthdate: string,
 }
 
-export default Puppy;
+interface Puppies {
+    puppies: Array<Puppy>
+}
+
+export { Puppy, Puppies };
