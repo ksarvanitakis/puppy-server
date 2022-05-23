@@ -33,5 +33,29 @@ describe('Testing api endpoint', () => {
       "Birthdate": "1 Jan 2017"
     });
   });
+  test('POST should create new puppy in database', async () => {
+    const res = await request(app)
+      .post('/api/puppies')
+      .send({ 
+        "breed": "Labradoodle",
+        "name": "Fido",
+        "birthdate": "24 May 2022"
+      })
+      .expect('content-type', 'application/json; charset=utf-8')
+      .expect(201);
+
+    expect(res.body.id).toBeDefined();
+  });
+  test('POST should not accept request without all required parameters', async () => {
+    const res = await request(app)
+      .post('/api/puppies')
+      .send({ 
+        "name": "Fido",
+        "birthdate": "24 May 2022"
+      })
+      .expect(409);
+
+    expect(res.text).toEqual('Please supply name, breed and birthdate to add your puppy to the database.');
+  });
 });
 
