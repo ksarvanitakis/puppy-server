@@ -15,4 +15,10 @@ app.get('/api/puppies', async(_req: Request, res: Response) => {
   return res.status(200).setHeader('Content-Type', 'application/json').json(AllPuppies);
 });
 
+app.get('/api/puppies/:id', async(req: Request, res: Response) => {
+  const data : Puppies = JSON.parse(readFileSync('./puppies.json', 'utf-8'));
+  const puppy = data.puppies.find(e => e.id === Number(req.params.id));
+  return res.status(200).setHeader('Content-Type', 'application/json').json(puppy);
+});
+
 export default app;
