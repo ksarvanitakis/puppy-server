@@ -64,7 +64,23 @@ describe('Testing api endpoint', () => {
 
     expect(res.text).toEqual('Please supply name, breed and birthdate to add your puppy to the database.');
   });
-  
-});
 
-// TODO: Check for falsy id, 
+  test('PUT should edit puppy in database', async () => {
+    const res = await request(app)
+      .put('/api/puppies/5')
+      .send({ 
+        "breed": "Husky",
+        "name": "Scruff",
+        "birthdate": "25 May 2022"
+      })
+      .expect('content-type', 'application/json; charset=utf-8')
+      .expect(204);
+
+    expect(res.body).toEqual({ 
+      "id": 5,
+      "breed": "Husky",
+      "name": "Scruff",
+      "birthdate": "25 May 2022"
+    });
+  });
+});

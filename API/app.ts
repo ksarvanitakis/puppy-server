@@ -1,11 +1,13 @@
 import express from 'express';
 import { Request, Response, Application } from 'express';
 import { readFileSync, writeFile } from 'fs';
-import { Puppies } from './ts-utils/interfaces';
+import { Puppies } from 'ts-utils/interfaces';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 
 const app: Application = express();
 
+app.use(cors())
 app.use(bodyParser.json());
 
 app.get('/api/test', (_req: Request, res: Response) => {
