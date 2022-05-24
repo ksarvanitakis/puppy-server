@@ -1,9 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Puppy, Puppies } from '../ts-utils/interfaces';
 
-const details = () => {
+
+const Details = ({ puppy }: { puppy:Puppy })=> {
+  const [visibility, setVisibility] = useState(false);
+
+  const handleClick = () => {
+    setVisibility(!visibility);
+  };
+
   return (
-    <div>details</div>
+    <>
+      <h3 onClick={handleClick} > { puppy.name }</h3>
+      <section className={visibility ? 'visible':'hidden'}>
+        <div> { puppy.breed }</div>
+        <div> { puppy.birthdate }</div>
+      </section>
+    </>
   )
 }
 
-export default details
+export default Details;
