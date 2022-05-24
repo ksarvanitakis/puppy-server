@@ -1,9 +1,20 @@
 import React from 'react'
 
-const add = () => {
+const Add = () => {
+
+  const handleSubmit = () => {
+
+  }
+
   return (
-    <div>add</div>
+    <>
+    <h1> Add your puppy </h1>
+    <form>
+      
+      <input type="submit" onClick={handleSubmit} placeholder='Add your puppy'/>
+    </form>
+    </>
   )
 }
 
-export default add
+export default Add
