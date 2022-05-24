@@ -21,6 +21,9 @@ app.get('/api/puppies', (_req: Request, res: Response) => {
 app.get('/api/puppies/:id', (req: Request, res: Response) => {
   const data : Puppies = JSON.parse(readFileSync('./puppies.json', 'utf-8'));
   const puppy = data.puppies.find(e => e.id === Number(req.params.id));
+  if (!puppy) {
+    return res.status(404).send('Sorry, no puppy by that ID');
+  }
   return res.status(200).setHeader('Content-Type', 'application/json').json(puppy);
 });
 
@@ -46,6 +49,20 @@ app.post('/api/puppies', (req: Request, res: Response) => {
     console.log('New puppy added to file');
     })
   return res.status(201).json(newPuppy);
-})
+});
+
+// app.put('/api/puppies/:id', (req: Request, res: Response) => {
+//   const data : Puppies = JSON.parse(readFileSync('./puppies.json', 'utf-8'));
+//   const puppy = data.puppies.find(e => e.id === Number(req.params.id));
+//   if (!puppy) {
+//     return res.status(404).send('Sorry, no puppy by that ID');
+//   }
+//   const updatedPuppy = {
+//     name: req.body.name,
+//     breed: req.body.breed,
+//     birthdate: req.body.birthdate
+//   }
+//   return res.status(200).setHeader('Content-Type', 'application/json').json(puppy);
+// });
 
 export default app;

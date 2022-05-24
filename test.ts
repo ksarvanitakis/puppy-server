@@ -33,6 +33,13 @@ describe('Testing api endpoint', () => {
       "Birthdate": "1 Jan 2017"
     });
   });
+  test('should get 404 at api/puppies/:id with non existing id', async () => {
+    const res = await request(app)
+      .get('/api/puppies/foo')
+      .expect(404);
+
+    expect(res.text).toEqual('Sorry, no puppy by that ID');
+  });
   test('POST should create new puppy in database', async () => {
     const res = await request(app)
       .post('/api/puppies')
@@ -57,6 +64,7 @@ describe('Testing api endpoint', () => {
 
     expect(res.text).toEqual('Please supply name, breed and birthdate to add your puppy to the database.');
   });
+  
 });
 
 // TODO: Check for falsy id, 
